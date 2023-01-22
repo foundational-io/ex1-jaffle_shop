@@ -12,13 +12,18 @@ payments as (
 
 ),
 
+customer as (
+    select * from {{ ref('stg_customers') }}
+)
+
 order_payments as (
 
     select
         order_id,
 
         {% for payment_method in payment_methods -%}
-        sum(case when payment_method = '{{ payment_method }}' then amount else 0 end) as {{ payment_method }}_amount,
+        sum(case when payment_method = '{{ payment_method }}' then amount else 0 end) as {{ payment_method }}_amount
+        count(payment_method) as {{ payment_method }}_count
         {% endfor -%}
 
         sum(amount) as total_amount
@@ -36,6 +41,7 @@ final as (
         orders.customer_id,
         orders.order_date,
         orders.status,
+        orders.shipping_address,
 
         {% for payment_method in payment_methods -%}
 
@@ -45,11 +51,15 @@ final as (
 
         order_payments.total_amount as amount
 
-    from orders
+        customers.address as shipping_address
 
+    from orders
 
     left join order_payments
         on orders.order_id = order_payments.order_id
+
+    left join customers
+        on orders.customer_id = customers.customer_id
 
 )
 

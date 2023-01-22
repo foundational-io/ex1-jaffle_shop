@@ -12,7 +12,7 @@ models:
           - not_null
 
       - name: first_name
-        description: Customer's first name. PII.
+        description: Customer's first name. PII. SHOULDN"T TRIGGER!
 
       - name: last_name
         description: Customer's last name. PII.
