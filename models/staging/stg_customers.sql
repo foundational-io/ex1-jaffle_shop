@@ -19,4 +19,4 @@ renamed as (
 
 )
 
-select * from renamed
+select id from renamed
