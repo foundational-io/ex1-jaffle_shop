@@ -76,3 +76,5 @@ For more information on dbt:
 - Read the [dbt viewpoint](https://docs.getdbt.com/docs/about/viewpoint).
 - Join the [dbt community](http://community.getdbt.com/).
 ---
+
+<!-- This is a demo dataset used for testing and development purposes. -->
