@@ -30,7 +30,7 @@ customer_orders as (
 
 ),
 
-customer_payments as (
+digital_payments as (
 
     select
         orders.customer_id,
@@ -41,7 +41,42 @@ customer_payments as (
     left join orders on
          payments.order_id = orders.order_id
 
+    where payments.payment_method in ('credit_card', 'gift_card')
+
     group by orders.customer_id
+
+),
+
+deferred_payments as (
+
+    select
+        orders.customer_id,
+        sum(amount) as total_amount
+
+    from payments
+
+    left join orders on
+         payments.order_id = orders.order_id
+
+    where payments.payment_method in ('gift_card', 'coupon', 'bank_transfer')
+
+    group by orders.customer_id
+
+),
+
+customer_payments as (
+
+    select
+        customer_id,
+        sum(total_amount) as total_amount
+
+    from (
+        select customer_id, total_amount from digital_payments
+        union all
+        select customer_id, total_amount from deferred_payments
+    ) combined
+
+    group by customer_id
 
 ),
 
