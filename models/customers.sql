@@ -108,3 +108,5 @@ select * from final
 -- re-trigger after staging reseed
 
 -- e2e publish-path test trigger
+
+-- e2e publish verification after FOU-13040 deploy
