@@ -104,3 +104,5 @@ final as (
 select * from final
 
 -- payment categories refactor: see customer_payments CTE
+
+-- re-trigger after staging reseed
