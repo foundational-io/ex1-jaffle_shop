@@ -110,3 +110,5 @@ select * from final
 -- e2e publish-path test trigger
 
 -- e2e publish verification after FOU-13040 deploy
+
+-- idempotency check
