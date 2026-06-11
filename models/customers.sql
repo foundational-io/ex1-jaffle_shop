@@ -106,3 +106,5 @@ select * from final
 -- payment categories refactor: see customer_payments CTE
 
 -- re-trigger after staging reseed
+
+-- e2e publish-path test trigger
